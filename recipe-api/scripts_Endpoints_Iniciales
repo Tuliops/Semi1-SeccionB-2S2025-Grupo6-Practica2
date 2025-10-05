@@ -1,0 +1,27 @@
+Endpoints Implementados
+🔐 Autenticación
+POST /api/register - Registro con confirmación de contraseña
+
+POST /api/login - Inicio de sesión
+
+GET /api/verify-token - Verificar token
+
+GET /api/profile - Obtener perfil
+
+📖 Recetas
+GET /api/recipes - Explorar todas las recetas
+
+POST /api/recipes - Crear y compartir receta
+
+GET /api/my-recipes - Mis recetas creadas
+
+GET /api/recipes/:id - Obtener receta específica
+
+Favoritos
+GET /api/favorites - Recetas favoritas
+
+POST /api/recipes/:id/favorite - Guardar receta en favoritos
+
+DELETE /api/recipes/:id/favorite - Remover de favoritos
+
+GET /api/recipes/:id/is-favorite - Verificar si es favorita

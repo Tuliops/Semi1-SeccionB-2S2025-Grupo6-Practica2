@@ -1,0 +1,10 @@
+# Crear proyecto
+mkdir recipe-api
+cd recipe-api
+
+# Inicializar npm
+npm init -y
+
+# Instalar dependencias
+npm install express sqlite3 bcryptjs jsonwebtoken multer cors
+npm install nodemon --save-dev
