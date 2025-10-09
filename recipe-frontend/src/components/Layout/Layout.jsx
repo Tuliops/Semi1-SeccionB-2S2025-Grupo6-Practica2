@@ -11,6 +11,23 @@ import {
   Search
 } from 'lucide-react';
 
+// ✅ FUNCIÓN PARA MANEJAR URLs DE IMAGEN CORRECTAMENTE
+const getImageUrl = (url) => {
+  if (!url) return null;
+  
+  // Si ya es una URL completa (Azure), úsala directamente
+  if (url.startsWith('http')) {
+    return url;
+  }
+  
+  // Si es una ruta relativa, conviértela a absoluta
+  if (url.startsWith('/')) {
+    return `http://localhost:3000${url}`;
+  }
+  
+  return url;
+};
+
 const Layout = ({ children }) => {
   const { user, logout } = useAuth();
   const location = useLocation();
@@ -72,9 +89,13 @@ const Layout = ({ children }) => {
               <div className="flex items-center space-x-3">
                 {user?.profile_image ? (
                   <img
-                    src={`http://localhost:3000${user.profile_image}`}
+                    src={getImageUrl(user.profile_image)}
                     alt={user.username}
                     className="w-8 h-8 rounded-full object-cover border border-amber-500/50"
+                    onError={(e) => {
+                      console.error('❌ Error loading profile image:', user.profile_image);
+                      e.target.style.display = 'none';
+                    }}
                   />
                 ) : (
                   <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center border border-gray-700">

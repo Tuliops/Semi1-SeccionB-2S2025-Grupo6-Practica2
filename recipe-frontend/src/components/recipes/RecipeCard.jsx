@@ -47,21 +47,54 @@ const RecipeCard = ({ recipe, onFavoriteUpdate }) => {
     return (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
   };
 
+  // ✅ FUNCIÓN PARA MANEJAR URLs DE IMAGEN CORRECTAMENTE
+  const getImageUrl = (url) => {
+    if (!url) return null;
+    
+    // Si ya es una URL completa de Azure, úsala directamente
+    if (url.startsWith('http')) {
+      return url;
+    }
+    
+    // Si es una ruta relativa, conviértela a absoluta
+    if (url.startsWith('/')) {
+      return `http://localhost:3000${url}`;
+    }
+    
+    return url;
+  };
+
+  console.log('🖼️ Recipe image URL:', recipe.image_url); // Debug
+  console.log('👤 Author image URL:', recipe.author_profile_image); // Debug
+
   return (
     <div className="card group hover:scale-105 hover:shadow-xl transition-all duration-300">
       {/* Imagen de la receta */}
       <div className="relative">
         {recipe.image_url ? (
           <img
-            src={`http://localhost:3000${recipe.image_url}`}
+            src={getImageUrl(recipe.image_url)} // ✅ CORREGIDO
             alt={recipe.title}
             className="w-full h-48 object-cover group-hover:brightness-110 transition-all duration-300"
+            onError={(e) => {
+              console.error('❌ Error loading recipe image:', recipe.image_url);
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'flex';
+            }}
           />
         ) : (
           <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
             <span className="text-4xl text-gray-600">🍳</span>
           </div>
         )}
+        
+        {/* Fallback si la imagen falla */}
+        <div 
+          className="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center hidden"
+          style={{ display: recipe.image_url ? 'none' : 'flex' }}
+        >
+          <span className="text-4xl text-gray-600">🍳</span>
+        </div>
         
         {/* Botón de favoritos */}
         <button
@@ -105,12 +138,23 @@ const RecipeCard = ({ recipe, onFavoriteUpdate }) => {
           <div className="flex items-center space-x-2">
             {recipe.author_profile_image ? (
               <img
-                src={`http://localhost:3000${recipe.author_profile_image}`}
+                src={getImageUrl(recipe.author_profile_image)} // ✅ CORREGIDO
                 alt={recipe.author}
                 className="w-6 h-6 rounded-full object-cover border border-amber-500/30"
+                onError={(e) => {
+                  console.error('❌ Error loading profile image:', recipe.author_profile_image);
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
               />
             ) : (
               <div className="w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center border border-gray-700">
+                <User size={12} className="text-amber-400" />
+              </div>
+            )}
+            {/* Fallback para imagen de perfil */}
+            {recipe.author_profile_image && (
+              <div className="w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center border border-gray-700 hidden">
                 <User size={12} className="text-amber-400" />
               </div>
             )}
@@ -129,7 +173,10 @@ const RecipeCard = ({ recipe, onFavoriteUpdate }) => {
           <div className="pt-4 border-t border-gray-800">
             <p className="text-xs text-gray-500 line-clamp-1">
               <span className="text-amber-400 font-medium">Ingredientes:</span>{' '}
-              {recipe.ingredients.substring(0, 80)}...
+              {typeof recipe.ingredients === 'string' 
+                ? recipe.ingredients.substring(0, 80) + '...'
+                : 'Ingredientes disponibles'
+              }
             </p>
           </div>
         )}
