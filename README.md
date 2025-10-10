@@ -1,5 +1,7 @@
 # RecipeBoxCloud  Azure &amp; AWS
 
+<img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/96ef8937-e7da-47c6-9a18-11e4df265061" />
+
 ## Seminario 1 Sección B Segundo Semestre 2025 
 ## Grupo # 6 
 
