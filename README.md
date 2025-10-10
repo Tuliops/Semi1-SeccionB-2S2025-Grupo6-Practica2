@@ -48,6 +48,8 @@ RecipeShare es una aplicación web full-stack que permite a los usuarios crear, 
 
 ## 2 Arquitectura del Sistema
 
+<img width="1213" height="644" alt="Arquitectura" src="https://github.com/user-attachments/assets/116c2e53-02f0-401d-a314-283e9598d22d" />
+
 ### 2. Descripción de la Arquitectura Utilizada
 
 Nuestra solución de la aplicación web de recetas de cocina fue desplegada utilizando múltiples servicios en la nube, tanto de **Microsoft Azure** como de **AWS**. A continuación, se describe la arquitectura utilizada:
