@@ -177,7 +177,7 @@ const RecipeDetail = () => {
         <div className="relative">
           {recipe.image_url ? (
             <img
-              src={`http://localhost:3000${recipe.image_url}`}
+              src={`${recipe.image_url}`}
               alt={recipe.title}
               className="w-full h-96 object-cover"
             />
@@ -194,7 +194,7 @@ const RecipeDetail = () => {
           <div className="absolute bottom-4 left-6 flex items-center space-x-3">
             {recipe.author_profile_image ? (
               <img
-                src={`http://localhost:3000${recipe.author_profile_image}`}
+                src={`${recipe.author_profile_image}`}
                 alt={recipe.author}
                 className="w-12 h-12 rounded-full object-cover border-2 border-amber-400"
               />

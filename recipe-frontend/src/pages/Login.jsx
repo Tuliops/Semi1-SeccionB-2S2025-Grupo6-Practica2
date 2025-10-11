@@ -137,8 +137,8 @@ const Login = () => {
             <div className="mt-6 p-4 bg-gray-800/50 rounded-lg border border-gray-700">
               <h3 className="text-sm font-medium text-amber-400 mb-2">Credenciales de prueba:</h3>
               <div className="text-xs text-gray-400 space-y-1">
-                <p><span className="text-gray-300">Usuario:</span> chef_01</p>
-                <p><span className="text-gray-300">Contraseña:</span> chef01</p>
+                <p><span className="text-gray-300">Usuario:</span> food_lover23</p>
+                <p><span className="text-gray-300">Contraseña:</span> gastronomia2024</p>
               </div>
             </div>
           </form>

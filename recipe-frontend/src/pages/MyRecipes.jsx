@@ -105,7 +105,7 @@ const MyRecipes = () => {
               <div className="relative">
                 {recipe.image_url ? (
                   <img
-                    src={`http://localhost:3000${recipe.image_url}`}
+                    src={`${recipe.image_url}`}
                     alt={recipe.title}
                     className="w-full h-48 object-cover group-hover:brightness-110 transition-all duration-300"
                   />

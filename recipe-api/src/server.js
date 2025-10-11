@@ -51,20 +51,41 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret_para_desarrollo';
 
-// ==================== MIDDLEWARE ====================
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://recipelboxfotosgt.z13.web.core.windows.net'
-  ],
+// ==================== CONFIGURACIÓN CORS CORREGIDA ====================
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Permitir requests sin origin (como Postman, servidor a servidor)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://recipeboxfotosgt.z13.web.core.windows.net', // ✅ CORREGIDO - estaba mal escrito
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'https://recipeboxfotosgt.z13.web.core.windows.net' // ✅ Agregado HTTPS también
+    ];
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('❌ CORS bloqueado para origen:', origin);
+      callback(new Error('CORS no permitido'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With']
-}));
+};
+
+app.use(cors(corsOptions));
 
 // MANEJAR PREFLIGHT REQUESTS - ESTO ES CRÍTICO
-app.options('*', cors());
+app.options('*', cors(corsOptions));
+
+// Middleware para logs de CORS
+app.use((req, res, next) => {
+  console.log(`🌍 CORS - ${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -634,13 +655,19 @@ app.use((error, req, res, next) => {
 });
 
 // ==================== INICIAR SERVIDOR ====================
-app.listen(PORT, async () => {
+app.listen(PORT, '0.0.0.0', async () => {
   console.log('\n🚀 Servidor RecipeShare API iniciado:');
-  console.log(`   📍 URL: http://localhost:${PORT}`);
+  console.log(`   📍 URL: http://0.0.0.0:${PORT}`);
+  console.log(`   🌍 Accesible desde: http://74.179.58.138:${PORT}`);
   console.log(`   📊 Base de datos: AWS RDS PostgreSQL`);
   console.log(`   ☁️  Storage: ${process.env.AZURE_STORAGE_CONNECTION_STRING ? 'Azure Blob Storage' : 'No configurado'}`);
   console.log(`   🌍 Entorno: ${process.env.NODE_ENV || 'development'}`);
   console.log(`   ⏰ Hora: ${new Date().toLocaleString()}`);
+  console.log('\n✅ URLs permitidas en CORS:');
+  console.log('   - http://recipeboxfotosgt.z13.web.core.windows.net');
+  console.log('   - https://recipeboxfotosgt.z13.web.core.windows.net');
+  console.log('   - http://localhost:5173');
+  console.log('   - http://localhost:3000');
   
   // Inicializar Azure Storage
   await initializeAzureStorage();
