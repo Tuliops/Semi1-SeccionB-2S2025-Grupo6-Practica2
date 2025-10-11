@@ -69,16 +69,23 @@ Nuestra solución de la aplicación web de recetas de cocina fue desplegada util
 - **Amazon RDS (PostgreSQL)** fue utilizado para persistencia de datos estructurados.
 - Encriptación de contraseñas utilizando `bcrypt`.
 - Almacenamiento de URLs de imágenes (no imágenes directamente).
+<img width="1821" height="715" alt="image" src="https://github.com/user-attachments/assets/cd6557f8-9441-4a2f-9957-ec2d8aa2d11b" />
 
 
 
 ### 🖼️ Almacenamiento de Imágenes
 - **Azure Blob Storage** utilizado para almacenar imágenes de perfil.
 - Contenedor público con control de acceso para obtener URL públicas.
+<img width="1920" height="621" alt="image" src="https://github.com/user-attachments/assets/e0d3d833-26f9-468d-83f2-eb72f29e4fdb" />
 
 ### ☁️ Arquitectura Serverless
 - Uso de **Azure Functions** para cargar imágenes de perfil.
 - Integración con **Azure API Management** para exponer la función como endpoint REST seguro.
+<img width="1910" height="739" alt="image" src="https://github.com/user-attachments/assets/f5085aa6-9852-440e-a018-c1ae8443c450" />
+
+<img width="1875" height="811" alt="image" src="https://github.com/user-attachments/assets/acb117a6-43e6-43f0-91bf-04523cce37ef" />
+
+<img width="1899" height="895" alt="image" src="https://github.com/user-attachments/assets/60b3e7f5-be54-4c71-9722-ddb10b9de276" />
 
 ### 🌐 Frontend
 - Aplicación web desarrollada en HTML/CSS/JS (o framework de preferencia).
@@ -87,6 +94,8 @@ Nuestra solución de la aplicación web de recetas de cocina fue desplegada util
 ![alt text](image-6.png)
 
 ![alt text](image-4.png)
+
+<img width="1919" height="597" alt="image" src="https://github.com/user-attachments/assets/a09c8971-7bdc-4a7c-8341-5a070de50667" />
 
 ---
 
