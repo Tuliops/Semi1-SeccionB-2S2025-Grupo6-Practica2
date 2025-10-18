@@ -58,7 +58,8 @@ const RecipeCard = ({ recipe, onFavoriteUpdate }) => {
     
     // Si es una ruta relativa, conviértela a absoluta
     if (url.startsWith('/')) {
-      return `http://74.179.58.138:3000${url}`;
+      //base de la url
+      return `http://baseurl3000${url}`;
     }
     
     return url;
